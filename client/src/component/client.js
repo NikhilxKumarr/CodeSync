@@ -6,6 +6,7 @@ function client (username)  {
     <div  className="d-flex align-items-center mb-3 ">
         <Avatar name={username} round={true} size="40" className="me-2"/>
         <span className="text-light">{username}</span>
+      dbdin
       
     </div>
   )
