@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import Client from "./client";
+import Editor from "./Editor";
 
 function EditorPage() {
-  const [clients, Setclients] = useState([
-    { SocketId: 1, username: "Nikhil" },
+  const [clients, setClients] = useState([
+    { socketId: 1, username: "Nikhil" },
     { socketId: 2, username: "Shipal" },
-    { SocketId: 3, username: "Parneet" },
+    { socketId: 3, username: "Parneet" },
   ]);
 
   return (
@@ -31,11 +33,9 @@ function EditorPage() {
 
           <div className="d-flex flex-column overflow-auto text-light">
             {clients.map((client) => (
-              <client key={client.SocketId} username={client.username} />
-              
+              <Client key={client.socketId} username={client.username} />
             ))}
           </div>
-
 
           {/* buttons */}
           <div className="mt-auto mb-3 px-2">
@@ -62,8 +62,8 @@ function EditorPage() {
         </div>
 
         {/* Editor */}
-        <div className="col-10 p-0 text-light d-flex flex-column h-100">
-          Editor
+        <div className="col-md-10 p-0 text-light d-flex flex-column h-100">
+          <Editor />
         </div>
       </div>
     </div>

@@ -1,15 +1,19 @@
-import React from 'react'
-import Avatar from 'react-avatar'
+import React from "react";
+import Avatar from "react-avatar";
 
-function client (username)  {
+function Client({username}) {
   return (
-    <div  className="d-flex align-items-center mb-3 ">
-        <Avatar name={username} round={true} size="40" className="me-2"/>
-        <span className="text-light">{username}</span>
-      dbdin
-      
+    <div className="d-flex align-items-center mb-3 ">
+      <Avatar
+        name={username.toString()}
+        round="14px"
+        size={50}
+        className="mr-3"
+      />
+      {/* <img src="/images/avtar.jpg" style={{ maxWidth: "50px" }}/> */}
+      <span className="mx-2 text-light">{username.toString()}</span>
     </div>
-  )
+  );
 }
 
-export default client
+export default Client;
