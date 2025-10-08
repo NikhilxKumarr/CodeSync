@@ -1,6 +1,16 @@
-import React from "react";
-
+import React, { useState } from "react";
+import { v4 as uuid } from "uuid";
 function Home() {
+  const[roomId,setRoomId]=useState("");
+  const[username,setUsername]=useState("");
+
+  const generateRoomId=(e)=>{
+    e.preventDefault();
+    const id=uuid();
+    setRoomId(id);
+    // console.log(id);
+  }
+
   return (
     <div className="container-fluid">
       <div className="row justify-content-center align-items-center min-vh-100">
@@ -24,6 +34,8 @@ function Home() {
               <div className="form-group">
                 <input
                   type="text"
+                  value={roomId}
+                  onChange={(e)=>setRoomId(e.target.value)}
                   className="form-control mb-3 py-2"
                   placeholder="Room ID"
                   style={{
@@ -56,6 +68,7 @@ function Home() {
                 <span
                   className="text-success fw-bold"
                   style={{ cursor: "pointer", textDecoration: "underline" }}
+                  onClick={generateRoomId}
                 >
                   New Room
                 </span>
