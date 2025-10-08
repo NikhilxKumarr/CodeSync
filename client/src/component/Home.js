@@ -1,15 +1,31 @@
 import React, { useState } from "react";
 import { v4 as uuid } from "uuid";
-function Home() {
-  const[roomId,setRoomId]=useState("");
-  const[username,setUsername]=useState("");
+import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
-  const generateRoomId=(e)=>{
+function Home() {
+  const [roomId, setRoomId] = useState("");
+  const [username, setUsername] = useState("");
+  const navigate = useNavigate();
+
+  const generateRoomId = (e) => {
     e.preventDefault();
-    const id=uuid();
+    const id = uuid();
     setRoomId(id);
-    // console.log(id);
-  }
+    toast.success("Room ID is Generated");
+  };
+
+  const joinRoom = () => {
+    if (!roomId || !username) {
+      toast.error(" Both Room ID & Username are required");
+      return;
+    }
+    navigate(`/editor/${roomId}`, {
+      state: { username },
+    });
+    // toast.success("Welcome to CodeSync ");
+    toast.success("Room is Created ");
+  };
 
   return (
     <div className="container-fluid">
@@ -35,7 +51,7 @@ function Home() {
                 <input
                   type="text"
                   value={roomId}
-                  onChange={(e)=>setRoomId(e.target.value)}
+                  onChange={(e) => setRoomId(e.target.value)}
                   className="form-control mb-3 py-2"
                   placeholder="Room ID"
                   style={{
@@ -44,6 +60,8 @@ function Home() {
                 />
                 <input
                   type="text"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
                   className="form-control mb-3 py-2"
                   placeholder="Username"
                   style={{
@@ -53,6 +71,7 @@ function Home() {
               </div>
 
               <button
+                onClick={joinRoom}
                 className="btn btn-success btn-lg w-100 mt-2"
                 style={{
                   borderRadius: "0.5rem",
@@ -78,9 +97,6 @@ function Home() {
         </div>
       </div>
     </div>
-    
-
-    
   );
 }
 
