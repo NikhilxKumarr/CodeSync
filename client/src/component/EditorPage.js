@@ -105,6 +105,10 @@ function EditorPage() {
                 borderRadius: "0.5rem",
                 transition: "all 0.3s",
               }}
+              onClick={() => {
+                navigator.clipboard.writeText(roomId);
+                toast.success("Room ID copied to clipboard");
+              }}
             >
               Copy Room ID
             </button>
@@ -113,6 +117,9 @@ function EditorPage() {
               style={{
                 borderRadius: "0.5rem",
                 transition: "all 0.3s",
+              }}
+              onClick={() => {
+                navigate("/");
               }}
             >
               Leave Room
