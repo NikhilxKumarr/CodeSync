@@ -1,6 +1,6 @@
 # CodeSync - Real-time Code Collaboration
 
-**CodeSync** is a real-time code collaboration web application that allows multiple users to collaborate on code in the same virtual room. It's built using the MERN stack (MongoDB optional, Express.js, React, Node.js) and Socket.IO for real-time communication.
+**CodeSync** is a real-time code collaboration web application that allows multiple users to collaborate on code in the same virtual room. It's built using the MERN stack ( Express.js, React, Node.js) and Socket.IO for real-time communication.
 
 ## Live Demo
 
