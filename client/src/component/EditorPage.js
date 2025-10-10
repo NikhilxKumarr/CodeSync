@@ -2,15 +2,27 @@ import React, { useState, useRef, useEffect } from "react";
 import Client from "./client";
 import Editor from "./Editor";
 import { initSocket } from "../socket";
-import { useLocation, useParams } from "react-router-dom";
+import { useNavigate ,useLocation, useParams ,Navigate} from "react-router-dom";
 
 function EditorPage() {
   const socketRef = useRef(null);
   const location = useLocation();
   const { roomId } = useParams();
+  const navigate = useNavigate();
+
   useEffect(() => {
     const init = async () => {
       socketRef.current = await initSocket();
+      socketRef.current.on("connect_error", (err) => handleErrors(err));
+      socketRef.current.on("connect_failed", (err) => handleErrors(err));
+
+      function handleErrors(e) {
+        console.log("socket error", e);
+        toast.error("Socket connection failed, try again later.");
+        navigate("/");
+      }
+
+      // emitting an event to server
       socketRef.current.emit("join", {
         roomId,
         username: location.state?.username,
@@ -24,6 +36,10 @@ function EditorPage() {
     { socketId: 2, username: "Shipal" },
     { socketId: 3, username: "Parneet" },
   ]);
+
+  if (!location.state) {
+    return <Navigate to="/" />;
+  }
 
   return (
     <div className="container-fluid vh-100">
