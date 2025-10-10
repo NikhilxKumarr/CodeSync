@@ -12,11 +12,10 @@ import CodeMirror from "codemirror";
 
 function Editor() {
   const editorRef = useRef(null);
-
   useEffect(() => {
     const init = async () => {
       const editor = CodeMirror.fromTextArea(
-        document.getElementById("realTimeEditor"),
+        (editorRef.current = document.getElementById("realTimeEditor")),
         {
           mode: { name: "javascript", json: true },
           theme: "dracula",
@@ -26,9 +25,13 @@ function Editor() {
           lineWrapping: true,
         }
       );
-        editor.setSize(null, "100%");
-    };
+      editor.setSize(null, "100%");
 
+      editor.on("change", (instance, changes) => {
+        // console.log("changes", instance, changes);
+
+      });
+    };
     init();
   }, []);
 
