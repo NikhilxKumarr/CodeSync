@@ -15,6 +15,7 @@ function EditorPage() {
   const [clients, setClients] = useState([]);
 
   const socketRef = useRef(null);
+  const codeRef = useRef(null);
   const location = useLocation();
   const { roomId } = useParams();
   const navigate = useNavigate();
@@ -31,10 +32,7 @@ function EditorPage() {
         navigate("/");
       }
       // emitting an event to server
-      socketRef.current.emit("join", roomId, location.state?.username
-      );
-
-
+      socketRef.current.emit("join", roomId, location.state?.username);
 
       socketRef.current.on("joined", ({ clients, username, socketId }) => {
         if (username !== location.state?.username) {
@@ -43,10 +41,11 @@ function EditorPage() {
         }
 
         setClients(clients);
-        // socketRef.current.emit("sync code", {
-        //   socketId,
-        //   code: codeRef.current,
-        // });
+
+        socketRef.current.emit("sync code", {
+          code: codeRef.current,
+          socketId,
+        } );
       });
       // listening for disconnected event
       socketRef.current.on("disconnected", ({ socketId, username }) => {
@@ -58,20 +57,12 @@ function EditorPage() {
     };
     init();
 
-
-
-    return()=>{  
+    return () => {
       socketRef.current.disconnect();
       socketRef.current.off("joined");
       socketRef.current.off("disconnected");
-    }
-
-
-
-
+    };
   }, []);
-
-  
 
   if (!location.state) {
     return <Navigate to="/" />;
@@ -131,7 +122,11 @@ function EditorPage() {
 
         {/* Editor */}
         <div className="col-md-10 p-0 text-light d-flex flex-column h-100">
-          <Editor />
+          <Editor
+            socketRef={socketRef}
+            roomId={roomId}
+            onCodeChange={(code) => (codeRef.current = code)}
+          />
         </div>
       </div>
     </div>
