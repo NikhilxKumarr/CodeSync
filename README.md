@@ -43,7 +43,7 @@ To run CodeSync locally or contribute to its development:
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/CodeSync.git
+git clone https://github.com/NikhilxKumarr/CodeSync.git
 cd CodeSync
 ```
 
