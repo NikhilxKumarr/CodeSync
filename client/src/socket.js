@@ -1,6 +1,7 @@
 import {io} from "socket.io-client";
 
-const SOCKET_URL = "http://localhost:5001";
+const SOCKET_URL = "https://codesync-backend-j95t.onrender.com";
+
 
 export const initSocket = async()=> {
     const option ={
