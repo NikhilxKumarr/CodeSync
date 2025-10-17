@@ -4,7 +4,7 @@
 
 ## Live Demo
 
-You can try out CodeSync by visiting the [live demo](https://your-render-link.onrender.com). Create or join a room and start collaborating with others in real time!
+You can try out CodeSync by visiting the [live demo](https://codesync-i2zm.onrender.com). Create or join a room and start collaborating with others in real time!
 
 
 
